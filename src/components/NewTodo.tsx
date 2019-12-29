@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import uuid from 'uuid/v4';
-import { addTodoAction } from '../redux';
+import { addTodoAction } from '../actions';
 
 const NewTodo: React.FC<any> = () => {
   const [newTodo, setNewTodo] = useState('');
@@ -28,6 +28,7 @@ const NewTodo: React.FC<any> = () => {
         type="text"
         placeholder="New todo..."
         onChange={handleChange}
+        value={newTodo}
       />
       <button type="submit">Add todo!</button>
     </form>

@@ -1,13 +1,18 @@
 import React from 'react'
+import { bindActionCreators, Dispatch } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleTodoAction, deleteTodoAction } from '../redux';
+import * as TodoActionCreators from '../actions';
+import { AppState } from '../configureStore';
+import { Todo } from '../types/Todo';
 
 const TodosList = () => {
-  const todos = useSelector((state: any) => state.todos);
+  const todos = useSelector((state: AppState): Todo[]  => state.todos);
   // Get dispatch function
-  const dispatch = useDispatch();
-  const toggleTodo = id => dispatch(toggleTodoAction(id));
-  const deleteTodo = id => dispatch(deleteTodoAction(id));
+  const dispatch: Dispatch = useDispatch();
+  const boundActionCreators = bindActionCreators(TodoActionCreators, dispatch);
+
+  const toggleTodo = id => boundActionCreators.toggleTodoAction(id);
+  const deleteTodo = id => boundActionCreators.deleteTodoAction(id);
 
   console.log('Im here', todos);
   return (

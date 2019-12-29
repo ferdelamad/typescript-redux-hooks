@@ -1,4 +1,3 @@
-import { createStore } from 'redux';
 import uuid from 'uuid/v4';
 
 const initialState = {
@@ -16,23 +15,13 @@ const initialState = {
   ]
 }
 
-// interface Todo {
-//   text: string,
-//   id: number,
-//   completed: boolean
-// }
-
-// interface State {
-//   todos: Array<Todo>
-// }
-
 //reducer
-const todosReducer = (state, { type, newTodo, id }) => {
+const todosReducer = (state, { type, todo, id }) => {
   switch (type) {
     case 'ADD_TODO':
       return {
         ...state,
-        todos: [ ...state.todos, newTodo]
+        todos: [ ...state.todos, todo]
       }
     case 'DELETE_TODO':
       return {
@@ -48,24 +37,3 @@ const todosReducer = (state, { type, newTodo, id }) => {
       return state;
   }
 }
-
-//actions
-export const addTodoAction = newTodo => ({
-  type: 'ADD_TODO',
-  newTodo
-})
-
-export const toggleTodoAction = id => ({
-  type: 'TOGGLE_TODO',
-  id
-})
-
-export const deleteTodoAction = id => ({
-  type: 'DELETE_TODO',
-  id
-})
-
-export const store = createStore(
-  todosReducer,
-  initialState,
-);
